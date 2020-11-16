@@ -1,32 +1,50 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <header>
+      <Navbar />
+    </header>
+    <div>
+      <b-alert
+        :show="alert.dismissCountDown"
+        dismissible
+        :variant="alert.variant"
+        @dismissed="alert.dismissCountDown=0"
+        @dismiss-count-down="countDownChanged"
+      >
+        {{alert.msg}}
+      </b-alert>
     </div>
     <router-view />
   </div>
 </template>
-
+<script>
+import Vue from 'vue'
+let bus = new Vue
+import Navbar from './components/User/Navbar/Navbar'
+export default {
+  data() {
+    return {
+      alert:{}
+    }
+  },
+  components:{
+    Navbar
+  },
+  methods: {
+    countDownChanged(dismissCountDown) {
+        this.alert.dismissCountDown = dismissCountDown
+      },
+  },
+  created() {
+    bus.$on('showAlert', params => {
+      alert(params)
+      this.alert = params
+    })
+  },
+}
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+body{
+  background-color: #eeeef0 !important;
 }
 </style>
