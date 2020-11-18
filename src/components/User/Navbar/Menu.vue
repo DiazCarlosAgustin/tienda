@@ -20,12 +20,7 @@
                 <router-link class="nav-link nav-item" to="/tienda">Tienda</router-link>
                 <router-link class="nav-link nav-item" to="/contacto">Contacto</router-link>
                 <div v-if="auth" class="d-flex d-lg-none justify-content-center">
-                    <b-nav-item-dropdown text="Usuario" class="text-center w-100" right>
-                        <router-link class="nav-link nav-item" to="/perfil">Perfil</router-link>
-                        <router-link class="nav-link nav-item" to="/favoritos">Favoritos</router-link>
-                        <router-link class="nav-link nav-item" to="/mis_compras">Mis compras</router-link>
-                        <router-link class="nav-link nav-item" to="/mis_compras" @click="logOut">Cerrar session</router-link>
-                    </b-nav-item-dropdown>
+                    <span class="nav-link nav-item" v-b-toggle.sidebar-user>{{user.nombre}}</span>
                 </div>
                 <router-link v-else class="d-flex d-lg-none nav-item nav-link justify-content-center" to="/acceder">Acceder</router-link>
             </b-navbar-nav>
@@ -37,12 +32,7 @@
                     <b-icon icon="bag"></b-icon>
                 </div>
                 <div v-if="auth">
-                    <b-nav-item-dropdown text="Usuario" right>
-                        <router-link class="nav-link nav-item" to="/perfil">Perfil</router-link>
-                        <router-link class="nav-link nav-item" to="/favoritos">Favoritos</router-link>
-                        <router-link class="nav-link nav-item" to="/mis_compras">Mis compras</router-link>
-                        <span class="nav-link nav-item" @click="logOut">Cerrar session</span>
-                    </b-nav-item-dropdown>
+                    <span class="nav-link nav-item" v-b-toggle.sidebar-right>{{user.nombre}}</span>
                 </div>
                 <router-link v-else to="/acceder" class="nav-link nav-item">Acceder</router-link>
             </b-navbar-nav>
@@ -63,10 +53,13 @@ export default {
         }),
     },
     methods: {
-        ...mapActions({
-            logOut: 'user/deleteSession'
-        })
 
     },
 }
 </script>
+<style lang="scss" scoped>
+nav{
+    background-color: white;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+}
+</style>

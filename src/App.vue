@@ -3,7 +3,7 @@
     <header>
       <Navbar />
     </header>
-    <div>
+    <div class="w-100">
       <b-alert
         :show="alert.dismissCountDown"
         dismissible
@@ -18,13 +18,16 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
-let bus = new Vue
 import Navbar from './components/User/Navbar/Navbar'
 export default {
   data() {
     return {
-      alert:{}
+      alert:{
+        msg:'',
+        variant:'',
+        dismissSecs: 5,
+        dismissCountDown: 0
+      }
     }
   },
   components:{
@@ -36,15 +39,22 @@ export default {
       },
   },
   created() {
-    bus.$on('showAlert', params => {
-      alert(params)
+    console.log("as")
+    this.$eventHub.$on('showAlert', (params) => {
+      console.log(params)
       this.alert = params
+      this.alert.dismissCountDown = this.alert.dismissSecs
     })
   },
 }
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap');
+h1, h2, h3, h4, h5 ,h6{
+  font-family: 'Roboto', sans-serif;
+}
 body{
-  background-color: #eeeef0 !important;
+  background-color: whitesmoke !important;
+  font-family: 'Open Sans', sans-serif;
 }
 </style>

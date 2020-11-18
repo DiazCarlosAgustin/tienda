@@ -14,26 +14,31 @@ export default {
     },
     mutations: {
         SET_USER(state, params){
+            console.log(params)
             state.user = params
             state.auth = Boolean(state.user)
         },
         SET_TOKEN(state,token){
-            cookies.set('userToken',token, '7d')
+            cookies.set('usertoken',token, '7d')
         }
     },
     actions: {
-        async getUser({commit}){
-            const res = await axios.get('http://127.0.0.1:3000/user/mainUser',{
+        getUser({commit}){
+            axios.get('http://127.0.0.1:3000/user/main',{
                 headers:{
-                    'user_token': cookies.get('userToken')
+                    'usertoken': cookies.get('usertoken')
                 }
+            }).then(res => {
+                if(res.data.user){
+                    commit('SET_USER', res.data.user)
+                }
+            }).catch(err => {
+                console.log(err)
             })
-            if(res.data.user){
-                commit('SET_USER', res.data)
-            }
+            
         },
         deleteSession({commit}){
-            cookies.remove('userToken', 'localhost')
+            cookies.remove('usertoken', 'localhost')
             commit('SET_USER', null)
             window.location.href = '/'
         }

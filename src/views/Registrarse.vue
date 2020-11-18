@@ -1,64 +1,33 @@
 <template>
   <div class="container h-100 w-100 d-flex justify-content-center">
     <div class="row d-flex justify-content-center w-100 mt-5">
-      <div class="col-12 col-md-6 col-lg-4">
+      <div class="col-12 col-md-6 col-lg-4 form">
         <b-form @submit.prevent="register">
-          <b-form-group id="labelNombre" label="Nombre" label-for="Nombre">
-            <b-form-input
-              id="Nombre"
-              v-model="user.nombre"
-              type="text"
-              required
-              placeholder="Apellido"
-            ></b-form-input>
-          </b-form-group>
-          <b-form-group
-            id="labelApellido"
-            label="Apellido"
-            label-for="Apellido"
-          >
-            <b-form-input
-              id="Apellido"
-              v-model="user.apellido"
-              type="text"
-              required
-              placeholder="Apellido"
-            ></b-form-input>
-          </b-form-group>
-          <b-form-group id="labelEmail" label="Email" label-for="Email">
-            <b-form-input
-              id="Email"
-              v-model="user.email"
-              type="email"
-              required
-              placeholder="Email"
-            ></b-form-input>
-          </b-form-group>
-          <b-form-group
-            id="labelTelefono"
-            label="Telefono"
-            label-for="Telefono"
-          >
-            <b-form-input
-              id="Telefono"
-              v-model="user.telefono"
-              type="number"
-              required
-            ></b-form-input>
-          </b-form-group>
-          <b-form-group
-            id="labelPassword"
-            label="Password"
-            label-for="Password"
-          >
-            <b-form-input
-              id="Password"
-              v-model="user.password"
-              type="password"
-              required
-              placeholder="Password"
-            ></b-form-input>
-          </b-form-group>
+          <md-field class="form-group">
+              <label>Nombre</label>
+              <md-input v-model="user.nombre"></md-input>
+          </md-field>
+          <md-field class="form-group">
+              <label>apellido</label>
+              <md-input v-model="user.apellido"></md-input>
+          </md-field>
+          <md-field class="form-group">
+              <label>Email</label>
+              <md-input v-model="user.email" type="email"></md-input>
+          </md-field>
+          <md-field class="form-group">
+              <label>Telefono</label>
+              <md-input v-model="user.telefono" type="number"></md-input>
+          </md-field>
+          <md-field class="form-group" :md-toggle-password="true">
+              <label>Contraseña</label>
+              <md-input v-model="user.password" type="password"></md-input>
+          </md-field>
+          <md-field class="form-group" :md-toggle-password="true">
+              <label>Confirmar contraseña</label>
+              <md-input v-model="confirmPassword" type="password"></md-input>
+          </md-field>
+          
           <b-form-group v-if="error">
             <p class="alert alert-danger">{{error}}</p>
           </b-form-group>
@@ -74,6 +43,7 @@
   </div>
 </template>
 <script>
+import '../styles.scss'
 import axios from "axios";
 export default {
   data() {
@@ -85,22 +55,47 @@ export default {
         email: "",
         password: ""
       },
-      error: null
+      confirmPassword:'',
+      error: null,
+      alert:{
+                msg:'',
+                variant:'',
+                dismissSecs: 5,
+                dismissCountDown: 0
+            }
     };
   },
   methods: {
-    async register() {
-      this.error = null
-      const res = await axios.post(
-        "http://127.0.0.1:3000/user/register",
-        this.user
-      );
-      if(res.data.status === "OK"){
-        this.error = res.data.msg
+    validConfirm(){
+      if(this.user.password === this.confirmPassword){
+        return true
       }
       else{
-        this.$router.redirect("/login")
+        return false
       }
+    },
+    async register() {
+      this.error = null
+      if( this.validConfirm() ){
+        const res = await axios.post(
+          "http://127.0.0.1:3000/user/register",
+          this.user
+        );
+          if(res.data.status != "OK"){
+            this.error = res.data.msg
+          }
+          else{
+            this.alert.msg = "Se registro correctamente."
+            this.alert.variant = 'success'
+            this.$eventHub.$emit('showAlert', this.alert)
+            this.$router.replace('/acceder')
+          }
+      }else{
+        this.alert.msg = "Las contraseñas ingresadas deben de ser iguales."
+        this.alert.variant = 'danger'
+        this.$eventHub.$emit('showAlert', this.alert)
+      }
+      
     }
   }
 };

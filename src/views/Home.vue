@@ -38,10 +38,10 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .titulo__section{
-  font-size: 2.5rem;
-  text-align: center;
+  font-size: 1.2rem;
+  text-align: left;
 
 }
 .fondo{
@@ -63,9 +63,5 @@ export default {
 }
 .titulo h1{
   font-size: 5.5rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.sub_titulo{
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 </style>

@@ -1,0 +1,25 @@
+$dark : #0A0908;
+$white: #fff;
+.form{
+    background-color: $white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 15px rgba(0,0,0, .2);
+}
+button._btn-dark{
+    background-color: $dark;
+}
+#sidebar-user{
+    background-color: $white;
+}
+#sidebar-user > .link_slider{
+    width: 100%;
+    height: 35px;
+    text-align: center !important;
+    color:$dark !important;
+    &:hover{
+        color:red;
+        border: 2px solid gray;
+        width: 100%;
+    }
+}
