@@ -78,7 +78,7 @@ export default {
       this.error = null
       if( this.validConfirm() ){
         const res = await axios.post(
-          "http://127.0.0.1:3000/user/register",
+          "http://127.0.0.1:3000/auth/register",
           this.user
         );
           if(res.data.status != "OK"){

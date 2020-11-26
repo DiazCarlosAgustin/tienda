@@ -32,7 +32,7 @@
                     <b-icon icon="bag"></b-icon>
                 </div>
                 <div v-if="auth">
-                    <span class="nav-link nav-item" v-b-toggle.sidebar-right>{{user.nombre}}</span>
+                    <span class="nav-link nav-item" v-b-toggle.sidebar-user>{{user.nombre}}</span>
                 </div>
                 <router-link v-else to="/acceder" class="nav-link nav-item">Acceder</router-link>
             </b-navbar-nav>
@@ -40,7 +40,7 @@
     </b-navbar>
 </template>
 <script>
-import {mapState, mapActions} from 'vuex'
+import {mapState} from 'vuex'
 export default {
     data() {
         return {

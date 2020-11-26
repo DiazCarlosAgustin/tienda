@@ -12,10 +12,15 @@ button._btn-dark{
 #sidebar-user{
     background-color: $white;
 }
-#sidebar-user > .link_slider{
+#sidebar-user  .link_slider{
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 35px;
     text-align: center !important;
+    padding-top:auto;
+    padding-bottom: auto;
     color:$dark !important;
     &:hover{
         color:red;
