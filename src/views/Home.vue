@@ -7,7 +7,7 @@
         </div>
         <div class="sub_titulo">
           <h3>
-          Encontra lo que estas buscando
+            Encontra lo que estas buscando
           </h3>
         </div>
       </div>
@@ -25,29 +25,28 @@
 
 <script>
 // @ is an alias to /src
-import categoria from '../components/Others/categoria'
+import categoria from "../components/Others/categoria";
 export default {
   name: "Home",
   data() {
     return {
-      data: [1,2,3,4,5,6,7,8,9,10]
-    }
+      data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    };
   },
-  components:{
-    categoria
-  }
+  components: {
+    categoria,
+  },
 };
 </script>
 <style lang="scss" scoped>
-.titulo__section{
+.titulo__section {
   font-size: 1.2rem;
   text-align: left;
-
 }
-.fondo{
+.fondo {
   width: 100%;
   height: 91vh;
-  background-image: url('../assets/Fondo.jpg');
+  background-image: url("../assets/Fondo.jpg");
   background-origin: border-box;
   background-position: center;
   background-size: cover;
@@ -55,13 +54,14 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.titulo, .sub_titulo{
+.titulo,
+.sub_titulo {
   display: block;
   width: 100%;
   text-align: center;
-  color:white;
+  color: white;
 }
-.titulo h1{
+.titulo h1 {
   font-size: 5.5rem;
 }
 </style>

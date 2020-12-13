@@ -19,7 +19,7 @@
                 <router-link class="nav-link nav-item" to="/">Inicio</router-link>
                 <router-link class="nav-link nav-item" to="/tienda">Tienda</router-link>
                 <router-link class="nav-link nav-item" to="/contacto">Contacto</router-link>
-                <div v-if="auth" class="d-flex d-lg-none justify-content-center">
+                <div v-if="user != null" class="d-flex d-lg-none justify-content-center">
                     <span class="nav-link nav-item" v-b-toggle.sidebar-user>{{user.nombre}}</span>
                 </div>
                 <router-link v-else class="d-flex d-lg-none nav-item nav-link justify-content-center" to="/acceder">Acceder</router-link>
@@ -31,7 +31,7 @@
                 <div class="px-3 my-auto nav-item">
                     <b-icon icon="bag"></b-icon>
                 </div>
-                <div v-if="auth">
+                <div v-if="user != null">
                     <span class="nav-link nav-item" v-b-toggle.sidebar-user>{{user.nombre}}</span>
                 </div>
                 <router-link v-else to="/acceder" class="nav-link nav-item">Acceder</router-link>
@@ -48,7 +48,6 @@ export default {
     },
     computed: {
         ...mapState({
-            auth: state => state.user.auth,
             user: state => state.user.user,
         }),
     },

@@ -27,22 +27,25 @@
 </template>
 <script>
 import Menu from "./Menu";
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from "vuex";
 
 import "../../../styles.scss";
 export default {
-    data(){
-        return{
-
-        }
-    },
-    methods:{
-      ...mapActions({
-          logOut: 'user/deleteSession'
-      })
-    },
+  data() {
+    return {};
+  },
+  methods: {
+    ...mapActions({
+      logOut: "user/deleteSession",
+    }),
+  },
   components: {
     Menu,
+  },
+  computed: {
+    ...mapGetters({
+      user: "user/GET_USER",
+    }),
   },
 };
 </script>

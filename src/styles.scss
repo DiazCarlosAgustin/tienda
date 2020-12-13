@@ -1,29 +1,34 @@
-$dark : #0A0908;
+$dark: #0a0908;
 $white: #fff;
-.form{
+
+.form {
     background-color: $white;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 10px 10px 15px rgba(0,0,0, .2);
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
 }
-button._btn-dark{
+
+button._btn-dark {
     background-color: $dark;
 }
-#sidebar-user{
+
+#sidebar-user {
     background-color: $white;
 }
-#sidebar-user  .link_slider{
+
+#sidebar-user .link_slider {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 35px;
     text-align: center !important;
-    padding-top:auto;
+    padding-top: auto;
     padding-bottom: auto;
-    color:$dark !important;
-    &:hover{
-        color:red;
+    color: $dark !important;
+
+    &:hover {
+        color: red;
         border: 2px solid gray;
         width: 100%;
     }
