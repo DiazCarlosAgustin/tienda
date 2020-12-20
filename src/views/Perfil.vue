@@ -104,7 +104,6 @@ export default {
     }),
     getUser() {
       this.user = this.$store.getters["user/GET_USER"];
-      console.log(this.user);
     },
     updateDataUser() {
       this.updateUser(this.user).then((res) => {
@@ -122,7 +121,6 @@ export default {
     },
     validateChangeInFormDataUser() {
       this.change = true;
-      console.log(this.change);
     },
   },
   created() {
