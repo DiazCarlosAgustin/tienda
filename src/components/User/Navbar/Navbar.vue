@@ -4,7 +4,7 @@
     <b-sidebar id="sidebar-user" class="" right shadow>
       <div class="px-3 py-2 w-100">
         <router-link to="/perfil" class="link_slider">Perfil</router-link>
-        <template v-if="user">
+        <template v-if="user.role">
           <router-link to="/mis_compras" class="link_slider"
             >Mis compras</router-link
           >
