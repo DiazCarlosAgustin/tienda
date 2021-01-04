@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <Menu />
-    <b-sidebar id="sidebar-user" class="" right shadow>
+    <b-sidebar id="sidebar-user" class="" v-if="user != null" right shadow>
       <div class="px-3 py-2 w-100">
         <router-link to="/perfil" class="link_slider">Perfil</router-link>
         <template v-if="user.role">
@@ -12,12 +12,12 @@
             >Mis favoritos</router-link
           >
         </template>
-        <template v-else>
-          <router-link to="/categorias" class="link_slider"
-            >Categorias</router-link
+        <template v-else-if="!user.role">
+          <router-link to="/admin/categoria" class="link_slider"
+            >Categoria</router-link
           >
-          <router-link to="/productos" class="link_slider"
-            >Productos</router-link
+          <router-link to="/admin/productos" class="link_slider"
+            >Producto</router-link
           >
         </template>
         <span class="link_slider" @click="logOut">Cerrar session</span>

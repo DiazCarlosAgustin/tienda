@@ -22,6 +22,11 @@ router.beforeEach(async (to, from, next) => {
   let auth = null;
   await store.dispatch("user/getUser");
   auth = store.state.user.auth;
+  var role = true;
+  if (store.state.user.user?.role != null) {
+    role = store.state.user.user.role;
+  }
+
   if (to.matched.some((route) => route.meta.requireAuth)) {
     if (auth) {
       next();
@@ -30,6 +35,13 @@ router.beforeEach(async (to, from, next) => {
     }
   } else if (to.matched.some((route) => route.meta.noRequireAuth)) {
     if (!auth) {
+      next();
+    } else {
+      next("/");
+    }
+  } else if (to.matched.some((route) => route.meta.requireAuthAdmin)) {
+    if (!role) {
+      //cambiar esto cuando termine de probar
       next();
     } else {
       next("/");

@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Acceder from "../views/Acceder.vue";
 import Registrarse from "../views/Registrarse.vue";
 import Perfil from "../views/Perfil.vue";
+import adminCategoria from "../views/Admin/Categoria.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,12 @@ const routes = [
     name: "Perfil",
     component: Perfil,
     meta: { requireAuth: true },
+  },
+  {
+    path: "/admin/categoria",
+    name: "adminCategoria",
+    component: adminCategoria,
+    meta: { requireAuthAdmin: true },
   },
 ];
 

@@ -30,7 +30,7 @@ export default {
           },
         })
         .then((res) => {
-          if (res.data.user) {
+          if (res.data.user != null) {
             commit("SET_USER", res.data.user);
           }
         })
