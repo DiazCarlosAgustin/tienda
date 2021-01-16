@@ -11,16 +11,33 @@
       </div>
     </div>
     <formCategoria />
+    <div class="row my-5">
+      <div class="col-12  d-flex justify-content-center">
+        <tablaCategorias :categorias="categorias" />
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import formCategoria from "../../components/Categoria/formCategoria";
+import tablaCategorias from "../../components/Categoria/tablaCategorias";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {};
   },
+  beforeMount() {
+    this.$store.dispatch("categoria/getCategorias");
+  },
   components: {
     formCategoria,
+    tablaCategorias,
+  },
+  methods: {},
+  computed: {
+    ...mapGetters({
+      categorias: "categoria/get_categoria",
+    }),
   },
 };
 </script>

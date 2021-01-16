@@ -11,7 +11,7 @@ export default {
     },
   },
   mutations: {
-    set_categoria(state, params) {
+    SET_CATEGORIA(state, params) {
       state.categorias = params;
     },
   },
@@ -20,8 +20,9 @@ export default {
       await axios
         .get("http://localhost:3000/categoria")
         .then((res) => {
+          console.log(res);
           if (res.data.status === "OK") {
-            commit("set_categorias", res.data.categorias);
+            commit("SET_CATEGORIA", res.data.categorias);
           }
         })
         .catch((err) => {
