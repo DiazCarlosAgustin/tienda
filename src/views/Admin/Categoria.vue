@@ -26,6 +26,17 @@ export default {
   data() {
     return {};
   },
+  created() {
+    this.$eventHub.$on("newCategoria", ($categoria) => {
+      this.categorias.push($categoria);
+    });
+    this.$eventHub.$on("deleteCategoria", ($id) => {
+      this.categorias.splice(
+        this.categorias.findIndex((cat) => cat.id === $id),
+        1
+      );
+    });
+  },
   beforeMount() {
     this.$store.dispatch("categoria/getCategorias");
   },

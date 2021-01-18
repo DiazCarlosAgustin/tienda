@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   props: ["categorias"],
   data() {
@@ -46,9 +47,62 @@ export default {
         { key: "descripcion", sortable: true },
         { key: "acciones", sortable: false },
       ],
+      alert: {
+        msg: "",
+        variant: "",
+        dismissSecs: 5,
+        dismissCountDown: 0,
+      },
     };
   },
   components: {},
+  methods: {
+    async deleteCategoria($id) {
+      const confirmacion = await this.showMsgBoxTwo();
+
+      if (confirmacion) {
+        await axios
+          .delete(`http://localhost:3000/categoria/${$id}`)
+          .then((result) => {
+            if (result.data.status === "OK") {
+              this.alert.variant = "success";
+              this.alert.msg = result.data.msg;
+              this.$eventHub.$emit("showAlert", this.alert);
+              this.$eventHub.$emit("deleteCategoria", $id);
+            } else {
+              this.alert.variant = "danger";
+              this.alert.msg = result.data.msg;
+              this.$eventHub.$emit("showAlert", this.alert);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+    async showMsgBoxTwo() {
+      var confirmacion = false;
+      await this.$bvModal
+        .msgBoxConfirm("¿Esta seguro que quiere eliminar esto?.", {
+          title: "Por favor confirmar.",
+          size: "sm",
+          buttonSize: "sm",
+          okVariant: "danger",
+          okTitle: "YES",
+          cancelTitle: "NO",
+          footerClass: "p-2",
+          hideHeaderClose: false,
+          centered: true,
+        })
+        .then((value) => {
+          confirmacion = value;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      return confirmacion;
+    },
+  },
 };
 </script>
 

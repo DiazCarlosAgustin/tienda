@@ -12,7 +12,9 @@ export default {
   },
   mutations: {
     SET_CATEGORIA(state, params) {
-      state.categorias = params;
+      if (params) {
+        state.categorias = params;
+      }
     },
   },
   actions: {

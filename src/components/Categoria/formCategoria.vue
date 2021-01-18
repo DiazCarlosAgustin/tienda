@@ -8,14 +8,20 @@
       >
         <md-field class="form-group">
           <label>Nombre</label>
-          <md-input name="nombre" v-model="categoria.nombre"></md-input>
+          <md-input
+            required
+            name="nombre"
+            v-model="categoria.nombre"
+          ></md-input>
         </md-field>
         <md-field class="form-group">
           <b-form-file
             type="file"
             name="file"
             ref="file"
+            id="file"
             accept="image/*"
+            required
             @change="takeFile"
             plain
           />
@@ -25,6 +31,7 @@
           <label>descripcion</label>
           <md-textarea
             name="descripcion"
+            required
             v-model="categoria.descripcion"
           ></md-textarea>
         </md-field>
@@ -76,11 +83,13 @@ export default {
               this.alert.msg = res.data.msg;
               this.alert.variant = "success";
               this.$eventHub.$emit("showAlert", this.alert);
+              this.$eventHub.$emit("newCategoria", res.data.categoria);
             } else {
               this.alert.msg = res.data.msg;
               this.alert.variant = "danger";
               this.$eventHub.$emit("showAlert", this.alert);
             }
+            this.clearForm();
           })
           .catch((err) => {
             console.error(err);
@@ -88,6 +97,12 @@ export default {
       } catch (err) {
         console.error(err);
       }
+    },
+    clearForm() {
+      this.categoria.imagen = "";
+      this.categoria.nombre = "";
+      this.categoria.descripcion = "";
+      document.getElementById("file").value = "";
     },
   },
 };
